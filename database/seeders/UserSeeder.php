@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         // Create Administrator user
         $admin = User::updateOrCreate(['id' => 1], [
             'name' => 'Administrator',
-            'email' => 'admin@dhqhattian.test',
+            'email' => 'admin@cardiac.test',
             'password' => Hash::make('password'),
             'department_id' => null,
             'status' => true,
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         // Create Administrator user
         $administrator = User::updateOrCreate(['id' => 3], [
             'name' => 'Administrator User',
-            'email' => 'administrator@dhqhattian.test',
+            'email' => 'administrator@cardiac.test',
             'password' => Hash::make('password'),
             'department_id' => null,
             'status' => true,
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
         // Create Front Desk user (no permissions by default)
         $frontDesk = User::updateOrCreate(['id' => 2], [
             'name' => 'Front Desk User',
-            'email' => 'receptionist@dhqhattian.test',
+            'email' => 'receptionist@cardiac.test',
             'password' => Hash::make('password'),
             'department_id' => null,
             'status' => true,

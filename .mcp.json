@@ -13,7 +13,7 @@
                 "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "/Users/alirazamarchal/Herd/dhqhattian"
+                "SITE_PATH": "/Users/alirazamarhcal/Herd/cardiac"
             }
         }
     }
