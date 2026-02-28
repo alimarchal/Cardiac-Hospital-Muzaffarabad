@@ -146,6 +146,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     $adminPermissions = [
                         'view dashboard',
                         'view dashboard statistics',
+                        'view patients',
                         'view reports',
                         'view opd reports',
                         'view daily reports',
