@@ -84,7 +84,7 @@
                     <td style="font-weight: bolder; font-size: 14px;">
                         @if($chit->ipd_opd == 1)
                             @if(!empty($chit->department))
-                                {{$chit->department->name}} - No ({{ $chitNumber }})
+                                {{$chit->department->name}} - Token No ({{ $chitNumber }})
                             @endif
                         @else
                             @if(!empty($chit->department))
@@ -325,7 +325,7 @@
                             flag = false;
                         @endif
 
-                            }
+                                }
                 }, 1000); // Adjust the delay time as needed
             });
 

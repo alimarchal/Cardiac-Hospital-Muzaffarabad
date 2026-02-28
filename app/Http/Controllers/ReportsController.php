@@ -191,7 +191,7 @@ class ReportsController extends Controller
             ->whereBetween('issued_date', [$date_start_at, $date_end_at]);
 
         // Get all specialist departments
-        $specialistDepartments = Department::where('name', 'ilike', '%specialist%');
+        $specialistDepartments = Department::where('name', 'like', '%specialist%');
 
         if ($request->department_id) {
             $specialistDepartments->where('id', $request->department_id);
@@ -613,9 +613,9 @@ class ReportsController extends Controller
 
             if ($patientName) {
                 $chitQuery->whereHas('patient', function ($q) use ($patientName) {
-                    $q->where('first_name', 'ilike', '%'.$patientName.'%')
-                        ->orWhere('last_name', 'ilike', '%'.$patientName.'%')
-                        ->orWhere('father_husband_name', 'ilike', '%'.$patientName.'%');
+                    $q->where('first_name', 'like', '%'.$patientName.'%')
+                        ->orWhere('last_name', 'like', '%'.$patientName.'%')
+                        ->orWhere('father_husband_name', 'like', '%'.$patientName.'%');
                 });
             }
 
@@ -651,9 +651,9 @@ class ReportsController extends Controller
 
             if ($patientName) {
                 $invoiceQuery->whereHas('patient', function ($q) use ($patientName) {
-                    $q->where('first_name', 'ilike', '%'.$patientName.'%')
-                        ->orWhere('last_name', 'ilike', '%'.$patientName.'%')
-                        ->orWhere('father_husband_name', 'ilike', '%'.$patientName.'%');
+                    $q->where('first_name', 'like', '%'.$patientName.'%')
+                        ->orWhere('last_name', 'like', '%'.$patientName.'%')
+                        ->orWhere('father_husband_name', 'like', '%'.$patientName.'%');
                 });
             }
 

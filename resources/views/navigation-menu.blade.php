@@ -200,9 +200,61 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden ">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @can('view dashboard')
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view patients')
+                <x-responsive-nav-link href="{{ route('patient.index') }}" :active="request()->routeIs('patient.*')">
+                    {{ __('Patients') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view reports')
+                <x-responsive-nav-link href="{{ route('reports.index') }}" :active="request()->routeIs('reports.*')">
+                    {{ __('Reports') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view departments')
+                <x-responsive-nav-link href="{{ route('department.index') }}" :active="request()->routeIs('department.*')">
+                    {{ __('OPDs') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view government departments')
+                <x-responsive-nav-link href="{{ route('governmentDepartment.index') }}"
+                    :active="request()->routeIs('governmentDepartment.*')">
+                    {{ __('Government Departments') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view fee types')
+                <x-responsive-nav-link href="{{ route('feeType.index') }}" :active="request()->routeIs('feeType.*')">
+                    {{ __('Hospital Fees') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view users')
+                <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('view roles')
+                <x-responsive-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.*')">
+                    {{ __('Roles') }}
+                </x-responsive-nav-link>
+            @endcan
+
+            @can('manage permissions')
+                <x-responsive-nav-link href="{{ route('permissions.index') }}"
+                    :active="request()->routeIs('permissions.*')">
+                    {{ __('Permissions') }}
+                </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

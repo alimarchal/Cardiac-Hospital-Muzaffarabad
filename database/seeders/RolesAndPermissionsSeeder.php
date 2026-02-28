@@ -141,20 +141,44 @@ class RolesAndPermissionsSeeder extends Seeder
                     $r->givePermissionTo(Permission::where('guard_name', $guard)->get());
                 }
 
-                // Administrator gets all permissions except roles/permissions management
+                // Administrator gets only dashboard and reports access
                 if ($role['name'] === 'Administrator') {
-                    $adminPermissions = Permission::where('guard_name', $guard)
-                        ->whereNotIn('name', [
-                            'view roles',
-                            'create roles',
-                            'edit roles',
-                            'delete roles',
-                            'view permissions',
-                            'manage permissions',
-                            'assign permissions',
-                        ])
-                        ->get();
-                    $r->givePermissionTo($adminPermissions);
+                    $adminPermissions = [
+                        'view dashboard',
+                        'view dashboard statistics',
+                        'view reports',
+                        'view opd reports',
+                        'view daily reports',
+                        'view department reports',
+                        'view admission reports',
+                        'view emergency reports',
+                        'view ssp reports',
+                    ];
+                    $r->givePermissionTo(
+                        Permission::where('guard_name', $guard)
+                            ->whereIn('name', $adminPermissions)
+                            ->get()
+                    );
+                }
+
+                // Front Desk/Receptionist gets default permissions
+                if ($role['name'] === 'Front Desk/Receptionist') {
+                    $frontDeskPermissions = [
+                        'create admissions',
+                        'create chits',
+                        'create invoices',
+                        'create patients',
+                        'view chits',
+                        'view admissions',
+                        'view dashboard',
+                        'view invoices',
+                        'view patients',
+                    ];
+                    $r->givePermissionTo(
+                        Permission::where('guard_name', $guard)
+                            ->whereIn('name', $frontDeskPermissions)
+                            ->get()
+                    );
                 }
             }
         }

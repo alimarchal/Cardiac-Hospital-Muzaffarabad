@@ -131,44 +131,46 @@
                         </div>
                     </a>
 
-                    <a href="{{ route('reports.opd.user-wise') }}"
-                        class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
-                        <div class="p-5">
-                            <div class="grid grid-cols-3 gap-1">
-                                <div class="col-span-2">
-                                    <div class="text-3xl font-bold leading-8">
-                                        User Wise
+                    @can('view opd reports')
+                        <a href="{{ route('reports.opd.user-wise') }}"
+                            class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                            <div class="p-5">
+                                <div class="grid grid-cols-3 gap-1">
+                                    <div class="col-span-2">
+                                        <div class="text-3xl font-bold leading-8">
+                                            User Wise
+                                        </div>
+                                        <div class="mt-1 text-base  font-bold text-gray-600">
+                                            OPD Report
+                                        </div>
                                     </div>
-                                    <div class="mt-1 text-base  font-bold text-gray-600">
-                                        OPD Report
+                                    <div class="col-span-1 flex items-center justify-end">
+                                        <img src="{{ url('images/reports.png') }}" alt="User Wise Report" class="h-12 w-12">
                                     </div>
-                                </div>
-                                <div class="col-span-1 flex items-center justify-end">
-                                    <img src="{{ url('images/reports.png') }}" alt="User Wise Report" class="h-12 w-12">
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
 
-                    <a href="{{ route('reports.opd.specialist-fees') }}"
-                        class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
-                        <div class="p-5">
-                            <div class="grid grid-cols-3 gap-1">
-                                <div class="col-span-2">
-                                    <div class="text-2xl font-bold leading-8">
-                                        Specialist Fees
+                        <a href="{{ route('reports.opd.specialist-fees') }}"
+                            class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
+                            <div class="p-5">
+                                <div class="grid grid-cols-3 gap-1">
+                                    <div class="col-span-2">
+                                        <div class="text-2xl font-bold leading-8">
+                                            Specialist Fees
+                                        </div>
+                                        <div class="mt-1 text-base  font-bold text-gray-600">
+                                            Daily Summary
+                                        </div>
                                     </div>
-                                    <div class="mt-1 text-base  font-bold text-gray-600">
-                                        Daily Summary
+                                    <div class="col-span-1 flex items-center justify-end">
+                                        <img src="{{ url('images/reports.png') }}" alt="Specialist Fees Report"
+                                            class="h-12 w-12">
                                     </div>
-                                </div>
-                                <div class="col-span-1 flex items-center justify-end">
-                                    <img src="{{ url('images/reports.png') }}" alt="Specialist Fees Report"
-                                        class="h-12 w-12">
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endcan
 
                     <a href="javascript:;"
                         class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-4 intro-y bg-white">
@@ -388,7 +390,7 @@
                         @foreach ($gender_wise as $gender => $count)
                             {{ $count }},
                         @endforeach
-                                                    ],
+                                                            ],
                     chart: {
                         width: '100%',
                         height: '380px',
@@ -415,7 +417,7 @@
                         @foreach ($gender_wise as $gender => $count)
                             '{{ $gender }} ({{ $count }})',
                         @endforeach
-                                                    ],
+                                                            ],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -438,7 +440,7 @@
                         @foreach ($opd_department_wise as $name => $count)
                             {{ $count }},
                         @endforeach
-                                                    ],
+                                                            ],
                     chart: {
                         width: '100%',
                         height: '380px',
@@ -465,7 +467,7 @@
                         @foreach ($opd_department_wise as $name => $count)
                             '{{ $name }}',
                         @endforeach
-                                                    ],
+                                                            ],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -485,10 +487,10 @@
                 var service_length_options = {
                     series: [
                         @php $age_count = 0; @endphp
-                                                            @foreach ($age_group_wise_data as $data => $count)
-                                                                {{ $count }}, @php $age_count = $age_count + $count; @endphp
-                                                            @endforeach
-                                                    ],
+                                                                    @foreach ($age_group_wise_data as $data => $count)
+                                                                        {{ $count }}, @php $age_count = $age_count + $count; @endphp
+                                                                    @endforeach
+                                                            ],
                     dataLabels: {
                         formatter: function (val, opts) {
                             return opts.w.config.series[opts.seriesIndex]
@@ -554,7 +556,7 @@
                         @foreach ($age_group_wise_data as $data => $count)
                             '{{ $data }}',
                         @endforeach
-                                                    ],
+                                                            ],
                     title: {
                         text: 'Patient Age Group Count Today:  {{ $age_count }}',
                         align: 'center',
@@ -600,7 +602,7 @@
                             @foreach ($admission_weekly_report as $date => $count)
                                 {{ $count }},
                             @endforeach
-                                                        ]
+                                                                ]
                     }],
                     chart: {
                         type: 'bar',
@@ -643,7 +645,7 @@
                             @foreach ($admission_weekly_report as $date => $count)
                                 '{{ $date }}',
                             @endforeach
-                                                        ],
+                                                                ],
                     },
                     yaxis: {
                         title: {
@@ -672,7 +674,7 @@
                         @foreach ($patient_test_daily_report as $key => $count)
                             {{ $count }},
                         @endforeach
-                                                    ],
+                                                            ],
                     chart: {
                         width: '100%',
                         height: '380px',
@@ -699,7 +701,7 @@
                         @foreach ($patient_test_daily_report as $key => $count)
                             '{{ $key }} ({{ $count }})',
                         @endforeach
-                                                    ],
+                                                            ],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -721,7 +723,7 @@
                         @foreach ($patient_test_daily_report_op as $key => $count)
                             {{ $count }},
                         @endforeach
-                                                    ],
+                                                            ],
                     chart: {
                         width: '100%',
                         height: '380px',
@@ -748,7 +750,7 @@
                         @foreach ($patient_test_daily_report_op as $key => $count)
                             '{{ $key }} ({{ $count }})',
                         @endforeach
-                                                    ],
+                                                            ],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -770,7 +772,7 @@
                         @foreach ($patient_test_daily_report_rd as $key => $count)
                             {{ $count }},
                         @endforeach
-                                                    ],
+                                                            ],
                     chart: {
                         width: '100%',
                         height: '380px',
@@ -797,7 +799,7 @@
                         @foreach ($patient_test_daily_report_rd as $key => $count)
                             '{{ $key }} ({{ $count }})',
                         @endforeach
-                                                    ],
+                                                            ],
                     responsive: [{
                         breakpoint: 480,
                         options: {
