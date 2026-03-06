@@ -63,7 +63,7 @@ class DashboardController extends Controller
 
             $issued_invoices_revenue = Invoice::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->sum('total_amount');
 
-        } elseif ($user->hasRole(['Administrator'])) {
+        } elseif ($user->hasRole(['Administrator', 'Super-Admin'])) {
 
             $issued_chits = Chit::whereDate('issued_date', Carbon::today())->count();
             $today_revenue = Chit::whereDate('issued_date', Carbon::today())->sum('amount');

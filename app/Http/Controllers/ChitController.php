@@ -226,7 +226,7 @@ class ChitController extends Controller
                 //                ->where('user_id', $user->id)->where('ipd_opd', 1)->whereDate('issued_date', Carbon::today())
 //                ->orderByDesc('created_at') // Corrected 'DSEC' to 'DESC'
                 ->paginate(500);
-        } elseif ($user->hasRole(['Administrator'])) {
+        } elseif ($user->hasRole(['Administrator', 'Super-Admin'])) {
             $issued_chits = QueryBuilder::for(Chit::class)
                 ->allowedFilters(['patient_id', 'fee_type_id', 'government_department_id', 'issued_date', 'ipd_opd', 'government_card_no', AllowedFilter::exact('government_non_gov'), AllowedFilter::exact('id'), AllowedFilter::exact('department_id')])
                 ->whereDate('issued_date', Carbon::today())
@@ -247,22 +247,32 @@ class ChitController extends Controller
 
         $user = \Auth::user();
         $issued_chits = null;
-        if ($user->hasRole(['Administrator'])) {
+
+        $allowedFilters = [
+            AllowedFilter::exact('department_id'),
+            AllowedFilter::exact('patient_id'),
+            AllowedFilter::exact('fee_type_id'),
+            AllowedFilter::exact('government_department_id'),
+            AllowedFilter::exact('government_non_gov'),
+            AllowedFilter::exact('government_card_no'),
+            AllowedFilter::exact('patient.sex'),
+            AllowedFilter::exact('user_id'),
+            'government_department_id',
+            'issued_date',
+        ];
+
+        if ($user->hasRole('Front Desk/Receptionist')) {
             $issued_chits = QueryBuilder::for(Chit::class)->with('user', 'patient', 'department')
-                ->allowedFilters([
-                    AllowedFilter::exact('department_id'),
-                    AllowedFilter::exact('patient_id'),
-                    AllowedFilter::exact('fee_type_id'),
-                    AllowedFilter::exact('government_department_id'),
-                    AllowedFilter::exact('government_non_gov'),
-                    AllowedFilter::exact('government_card_no'),
-                    AllowedFilter::exact('patient.sex'),
-                    AllowedFilter::exact('user_id'),
-                    'government_department_id',
-                    'issued_date',
-                ])
+                ->allowedFilters($allowedFilters)
+                ->where('user_id', $user->id)
                 ->whereBetween('created_at', [$date_start_at, $date_end_at])
-                ->orderBy('created_at') // Corrected 'DSEC' to 'DESC'
+                ->orderBy('created_at')
+                ->paginate(100000)->withQueryString();
+        } elseif ($user->hasRole(['Administrator', 'Super-Admin'])) {
+            $issued_chits = QueryBuilder::for(Chit::class)->with('user', 'patient', 'department')
+                ->allowedFilters($allowedFilters)
+                ->whereBetween('created_at', [$date_start_at, $date_end_at])
+                ->orderBy('created_at')
                 ->paginate(100000)->withQueryString();
         }
 

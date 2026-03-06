@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($issued_chits->sortByDesc('issued_date') as $chit)
+                        @foreach(($issued_chits?->sortByDesc('issued_date') ?? []) as $chit)
                             <tr class="border-black">
                                 <td class="border-black border px-4 py-2">{{$loop->iteration}}</td>
                                 <td class="border-black border px-4 py-2">{{date('y')}}-{{ $chit->id .'-' . $chit->patient_id}}</td>
@@ -75,14 +75,14 @@
                         @endforeach
                         <tr class="border-black bg-black">
                             <td class="border-black text-white border px-4 py-2 text-right font-extrabold" colspan="6">Total Amount </td>
-                            <td class="border-black text-white border px-4 py-2 text-center font-extrabold">Rs. {{ number_format($issued_chits->sum('amount'),2) }}</td>
+                            <td class="border-black text-white border px-4 py-2 text-center font-extrabold">Rs. {{ number_format($issued_chits?->sum('amount') ?? 0, 2) }}</td>
                             <td class="border-black text-white border px-4 py-2 text-center font-extrabold"></td>
                         </tr>
                         </tbody>
                     </table>
 
                     <div class="mt-4">
-                        {{ $issued_chits->links() }}
+                        {{ $issued_chits?->links() }}
                     </div>
                 </div>
 
