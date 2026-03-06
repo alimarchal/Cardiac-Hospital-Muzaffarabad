@@ -95,10 +95,7 @@ class ReportsController extends Controller
             $roleName = 'Front Desk/Receptionist';
             $users = \App\Models\User::role($roleName)->where('id', $user_id)->get();
         } else {
-            // Exclude Super-Admin role only
-            $users = \App\Models\User::whereDoesntHave('roles', function ($query) {
-                $query->where('name', 'Super-Admin');
-            })->get();
+            $users = \App\Models\User::all();
         }
 
         foreach ($users as $user) {

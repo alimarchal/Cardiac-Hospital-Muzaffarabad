@@ -104,9 +104,9 @@ class ChitController extends Controller
                 $amount_hif = 0.00;
                 $govt_amount = 0.00;
                 if ($request->department_id == 7) {
-                    $fee_type_id = 108;
+                    $fee_type_id = 107;
                 } elseif ($request->department_id == 23) {
-                    $fee_type_id = 270;
+                    $fee_type_id = 107;
                 } elseif ($request->department_id == 1) {
                     $fee_type_id = 1;
                 } elseif ($request->department_id == 16) {
@@ -117,7 +117,7 @@ class ChitController extends Controller
                     if ($feeType) {
                         $fee_type_id = $feeType->id;
                     } else {
-                        $fee_type_id = 107;
+                        $fee_type_id = 275;
                     }
                 }
 
@@ -130,14 +130,14 @@ class ChitController extends Controller
                 }
             } else {
                 if ($request->department_id == 7) {
-                    $amount = FeeType::find(108)->amount;
-                    $amount_hif = FeeType::find(108)->hif;
-                    $fee_type_id = 108;
+                    $amount = FeeType::find(107)->amount;
+                    $amount_hif = FeeType::find(107)->hif;
+                    $fee_type_id = 107;
                     $govt_amount = $amount - $amount_hif;
                 } elseif ($request->department_id == 23) {
-                    $amount = FeeType::find(270)->amount;
-                    $amount_hif = FeeType::find(270)->hif;
-                    $fee_type_id = 270;
+                    $amount = FeeType::find(107)->amount;
+                    $amount_hif = FeeType::find(107)->hif;
+                    $fee_type_id = 107;
                     $govt_amount = $amount - $amount_hif;
                 } elseif ($request->department_id == 1) {
                     // For emergency
@@ -160,9 +160,9 @@ class ChitController extends Controller
                         $amount_hif = $feeType->hif;
                         $govt_amount = $amount - $amount_hif;
                     } else {
-                        $fee_type_id = 107;
-                        $amount = FeeType::find(107)->amount;
-                        $amount_hif = FeeType::find(107)->hif;
+                        $fee_type_id = 275;
+                        $amount = FeeType::find(275)->amount;
+                        $amount_hif = FeeType::find(275)->hif;
                         $govt_amount = $amount - $amount_hif;
                     }
                 }
