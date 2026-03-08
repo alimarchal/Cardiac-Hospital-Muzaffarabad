@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
 
 
          // Create Front Desk user
-        $frontDesk_2 = User::updateOrCreate(['id' => 2], [
+        $frontDesk_2 = User::updateOrCreate(['id' => 4], [
             'name' => 'SHAFAT AZIZ',
             'email' => 'shafat@cardiac.test',
             'password' => Hash::make('03129404718'),
