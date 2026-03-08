@@ -36,14 +36,27 @@ class UserSeeder extends Seeder
 
         // Create Front Desk user
         $frontDesk = User::updateOrCreate(['id' => 2], [
-            'name' => 'Front Desk User',
-            'email' => 'receptionist@cardiac.test',
-            'password' => Hash::make('password'),
+            'name' => 'ADIL RAFIQUE',
+            'email' => 'adil@gmail.com',
+            'password' => Hash::make('03048942308'),
             'department_id' => null,
             'status' => true,
             'profile_photo_path' => null,
         ]);
 
         $frontDesk->syncRoles(['Front Desk/Receptionist']);
+
+
+         // Create Front Desk user
+        $frontDesk_2 = User::updateOrCreate(['id' => 2], [
+            'name' => 'SHAFAT AZIZ',
+            'email' => 'shafat@cardiac.test',
+            'password' => Hash::make('03129404718'),
+            'department_id' => null,
+            'status' => true,
+            'profile_photo_path' => null,
+        ]);
+
+        $frontDesk_2->syncRoles(['Front Desk/Receptionist']);
     }
 }
