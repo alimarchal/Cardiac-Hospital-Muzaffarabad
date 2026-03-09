@@ -68,7 +68,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|exists:roles,id,guard_name,'.self::ROLE_GUARD,
             'department_id' => 'nullable|exists:departments,id',
-            'status' => 'required|in:Active,Inactive',
+            'status' => 'required|boolean',
         ]);
 
         $user = User::create([
@@ -76,7 +76,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'department_id' => $request->department_id,
-            'status' => $request->status,
+            'status' => $request->boolean('status'),
         ]);
 
         $role = Role::findById($request->integer('role'), self::ROLE_GUARD);

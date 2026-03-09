@@ -40,14 +40,7 @@
                 </div>
                 <div class="flex flex-col items-end">
                     @php
-                        // Check if this is a specialist department (IDs 25-32) with HIF breakdown
-                        $isSpecialist = $chit->department_id >= 25 && $chit->department_id <= 32;
-                        if ($isSpecialist && $chit->amount > 0) {
-                            $gf = $chit->amount - $chit->amount_hif;
-                            $patient_id = "Total: " . number_format($chit->amount, 0) . "\nHIF: " . number_format($chit->amount_hif, 0) . "\nGF: " . number_format($gf, 0) . "\nC" . $chit->id;
-                        } else {
-                            $patient_id = (string) "RS." . $chit->amount . "\nC" . $chit->id;
-                        }
+                        $patient_id = $patient->title . ' ' . $patient->first_name . ' ' . $patient->last_name . "\nMR: " . date('y') . '-' . $patient->id . '-' . $chit->id . "\nMobile: " . $patient->mobile . "\nC" . $chit->id;
                     @endphp
                     {{-- @php $patient_id = (string) "RS.". $chit->amount . "\nC$chit->id" .
                     "\n$chit->issued_date\nDeveloped By Ali Raza Marchal\nTel: 0300-8169924"; @endphp--}}
@@ -325,7 +318,7 @@
                             flag = false;
                         @endif
 
-                                }
+                                    }
                 }, 1000); // Adjust the delay time as needed
             });
 

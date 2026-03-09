@@ -91,7 +91,7 @@
                     style="width: 200px;">
             </div>
             <div class="flex flex-col items-end">
-                @php $patient_id = (string) "RS." . $total_amount . "\nInvoice #: $invoice->id"; @endphp
+                @php $patient_id = $patient->title . ' ' . $patient->first_name . ' ' . $patient->last_name . "\nMR: " . date('y') . '-' . $patient->id . '-' . $invoice->id . "\nMobile: " . $patient->mobile . "\nInvoice #: " . $invoice->id; @endphp
                 {!! DNS2D::getBarcodeSVG($patient_id, 'QRCODE', 3, 3) !!}
             </div>
         </div>
