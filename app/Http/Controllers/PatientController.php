@@ -31,13 +31,17 @@ class PatientController extends Controller
                 'first_name',
                 'last_name',
                 'father_husband_name',
-                'sex',
+                AllowedFilter::exact('sex'),
                 'cnic',
                 'mobile',
-                'government_non_gov',
+                AllowedFilter::exact('government_non_gov'),
                 AllowedFilter::exact('government_card_no'),
-                AllowedFilter::exact('id'),
-            ], )
+                AllowedFilter::callback('id', function ($query, $value): void {
+                    if (is_numeric($value)) {
+                        $query->where('id', $value);
+                    }
+                }),
+            ])
             ->orderByDesc('created_at') // Corrected 'DSEC' to 'DESC'
             ->paginate(3)
             ->withQueryString();
