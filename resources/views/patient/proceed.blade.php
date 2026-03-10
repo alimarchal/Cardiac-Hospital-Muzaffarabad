@@ -183,7 +183,7 @@
                                             @endforeach
                                         </select>
 
-                                        @role('Administrator')
+                                        @role('Administrator|Super-Admin')
                                         <select name="status" required id="status" width="50%"
                                             class="select2 w-1/2 px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500">
                                             <option value="">Select status of invoice</option>

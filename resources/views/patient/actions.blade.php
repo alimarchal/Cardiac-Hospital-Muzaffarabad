@@ -40,7 +40,7 @@
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
                                 <div class="text-3xl font-bold leading-8">
-                                    {{ \App\Models\Invoice::where('patient_id',$patient->id)->count() }}
+                                    {{ \App\Models\Invoice::where('patient_id', $patient->id)->count() }}
                                 </div>
                                 <div class="mt-1 text-base  font-bold text-gray-600">
                                     Issued Invoices
@@ -54,78 +54,78 @@
                     </div>
                 </a>
 
-                @if(Auth::user()->hasRole(['Administrator','Front Desk/Receptionist']))
-                <a href="{{ route('patient.proceed', $patient->id) }}"
-                    class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
-                    <div class="p-5">
-                        <div class="grid grid-cols-3 gap-1">
-                            <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">
-                                    Bill
+                @if(Auth::user()->hasRole(['Administrator', 'Front Desk/Receptionist', 'Super-Admin']))
+                    <a href="{{ route('patient.proceed', $patient->id) }}"
+                        class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
+                        <div class="p-5">
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="col-span-2">
+                                    <div class="text-3xl font-bold leading-8">
+                                        Bill
+                                    </div>
+                                    <div class="mt-1 text-base  font-bold text-gray-600">
+                                        Make Invoice
+                                    </div>
                                 </div>
-                                <div class="mt-1 text-base  font-bold text-gray-600">
-                                    Make Invoice
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3127/3127109.png" alt="legal case"
+                                        class="h-12 w-12">
                                 </div>
-                            </div>
-                            <div class="col-span-1 flex items-center justify-end">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3127/3127109.png" alt="legal case"
-                                    class="h-12 w-12">
                             </div>
                         </div>
-                    </div>
-                </a>
-                <a href="{{ route('patient.issue-new-chit', $patient->id) }}"
-                    class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
+                    </a>
+                    <a href="{{ route('patient.issue-new-chit', $patient->id) }}"
+                        class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
 
-                    <div class="p-5">
-                        <div class="grid grid-cols-3 gap-1">
-                            <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">
-                                    Issue
+                        <div class="p-5">
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="col-span-2">
+                                    <div class="text-3xl font-bold leading-8">
+                                        Issue
+                                    </div>
+                                    <div class="mt-1 text-base font-bold text-gray-600">
+                                        New Chit
+                                    </div>
                                 </div>
-                                <div class="mt-1 text-base font-bold text-gray-600">
-                                    New Chit
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <img src="{{ Storage::url('issue_new_chit.png') }}" alt="legal case" class="h-12 w-12">
+                                    {{-- <img src="https://cdn-icons-png.flaticon.com/512/2906/2906361.png" alt="legal case"
+                                        class="h-12 w-12">--}}
                                 </div>
-                            </div>
-                            <div class="col-span-1 flex items-center justify-end">
-                                <img src="{{ Storage::url('issue_new_chit.png') }}" alt="legal case" class="h-12 w-12">
-                                {{-- <img src="https://cdn-icons-png.flaticon.com/512/2906/2906361.png" alt="legal case"
-                                    class="h-12 w-12">--}}
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <a href="{{ route('patient.emergency_treatment', $patient->id) }}"
-                    class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
+                    <a href="{{ route('patient.emergency_treatment', $patient->id) }}"
+                        class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
 
-                    <div class="p-5">
-                        <div class="grid grid-cols-3 gap-1">
-                            <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">
-                                    Emergency
+                        <div class="p-5">
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="col-span-2">
+                                    <div class="text-3xl font-bold leading-8">
+                                        Emergency
+                                    </div>
+                                    <div class="mt-1 text-base font-bold text-gray-600">
+                                        Treatment
+                                    </div>
                                 </div>
-                                <div class="mt-1 text-base font-bold text-gray-600">
-                                    Treatment
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <img src="{{ Storage::url('pulse.png') }}" alt="legal case" class="h-12 w-12">
+                                    {{-- <img src="https://cdn-icons-png.flaticon.com/512/2906/2906361.png" alt="legal case"
+                                        class="h-12 w-12">--}}
                                 </div>
-                            </div>
-                            <div class="col-span-1 flex items-center justify-end">
-                                <img src="{{ Storage::url('pulse.png') }}" alt="legal case" class="h-12 w-12">
-                                {{-- <img src="https://cdn-icons-png.flaticon.com/512/2906/2906361.png" alt="legal case"
-                                    class="h-12 w-12">--}}
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @endif
             </div>
 
         </div>
     </div>
     @section('custom_script')
-    <script>
+        <script>
 
 
-    </script>
+        </script>
     @endsection
 </x-app-layout>
