@@ -12,6 +12,12 @@ return new class extends Migration
     {
         $now = now();
 
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT setval(pg_get_serial_sequence('departments', 'id'), COALESCE((SELECT MAX(id) FROM departments), 0) + 1, false)");
+            DB::statement("SELECT setval(pg_get_serial_sequence('fee_categories', 'id'), COALESCE((SELECT MAX(id) FROM fee_categories), 0) + 1, false)");
+            DB::statement("SELECT setval(pg_get_serial_sequence('fee_types', 'id'), COALESCE((SELECT MAX(id) FROM fee_types), 0) + 1, false)");
+        }
+
         $departmentId = DB::table('departments')->where('name', 'OPD Emergency')->value('id');
 
         if ($departmentId) {
