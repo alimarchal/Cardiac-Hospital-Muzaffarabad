@@ -110,7 +110,7 @@ class UserController extends Controller
 
         $departments = Department::orderBy('name')->pluck('name', 'id');
 
-        $userPermissions = $user->getDirectPermissions()->pluck('id')->toArray();
+        $userPermissions = $user->getAllPermissions()->pluck('id')->toArray();
         $userRoleId = $user->roles->first()?->id;
 
         return view('users.edit', compact('user', 'roles', 'permissions', 'departments', 'userPermissions', 'userRoleId'));

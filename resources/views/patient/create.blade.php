@@ -23,7 +23,7 @@
                 <x-success-message class="mb-4" />
                 <img src="{{  url('images/patient-emergency.png')}}" alt="Patient Image" class="m-auto w-24 rounded p-1"
                     style="border: 1px solid black; ">
-                <h1 class="text-2xl text-center font-bold">District Headquarter Hospital Jehlum Valley (DHQ JV)</h1>
+                <h1 class="text-2xl text-center font-bold">{{ config('app.name') }}</h1>
                 <h1 class="text-xl text-center font-bold">Patient Information</h1>
 
                 <form action="{{ route('patient.store') }}" method="POST" class="p-8">

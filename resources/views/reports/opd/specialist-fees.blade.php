@@ -156,7 +156,7 @@
 
                     <p class="text-center font-extrabold mb-4">
                         Daily Summary of Specialist Fees<br>
-                        District Headquarter Hospital Jehlum Valley<br>
+                        {{ config('app.name') }}<br>
                         For the date starting {{ \Carbon\Carbon::parse($start_date)->format('d-M-Y') }} to
                         {{ \Carbon\Carbon::parse($end_date)->format('d-M-Y') }}
                         <br>
@@ -185,11 +185,14 @@
                                     <td class="text-center" style="vertical-align: middle;">{{ $stats['total_patients'] }}
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;">
-                                        {{ $stats['entitled_patients'] }}</td>
+                                        {{ $stats['entitled_patients'] }}
+                                    </td>
                                     <td class="text-center" style="vertical-align: middle;">
-                                        {{ $stats['non_entitled_patients'] }}</td>
+                                        {{ $stats['non_entitled_patients'] }}
+                                    </td>
                                     <td class="text-right" style="vertical-align: middle;">
-                                        {{ number_format($stats['total_fees'], 2) }}</td>
+                                        {{ number_format($stats['total_fees'], 2) }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

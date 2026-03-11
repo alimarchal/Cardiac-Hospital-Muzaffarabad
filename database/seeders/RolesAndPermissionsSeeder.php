@@ -38,6 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'create invoices',
             'edit invoices',
             'delete invoices',
+            'return invoices',
 
             // Admissions
             'view admissions',

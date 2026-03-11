@@ -210,12 +210,17 @@ class PatientController extends Controller
 
             // Get department name for dynamic fee lookup
             $department = Department::find($request->department_id);
+            $emergencyOpdFeeType = FeeType::where('fee_category_id', 13)
+                ->where('type', 'Emergency Chit')
+                ->first();
 
             if ($request->input('government_department_id')) {
                 $amount = 0.00;
                 $amount_hif = 0.00;
                 $govt_amount = 0.00;
-                if ($request->department_id == 7) {
+                if ($department && $department->name === 'OPD Emergency' && $emergencyOpdFeeType) {
+                    $fee_type_id = $emergencyOpdFeeType->id;
+                } elseif ($request->department_id == 7) {
                     $fee_type_id = 108;
                 } elseif ($request->department_id == 23) {
                     $fee_type_id = 270;
@@ -243,7 +248,12 @@ class PatientController extends Controller
                     }
                 }
             } else {
-                if ($request->department_id == 7) {
+                if ($department && $department->name === 'OPD Emergency' && $emergencyOpdFeeType) {
+                    $amount = $emergencyOpdFeeType->amount;
+                    $amount_hif = $emergencyOpdFeeType->hif;
+                    $fee_type_id = $emergencyOpdFeeType->id;
+                    $govt_amount = $amount - $amount_hif;
+                } elseif ($request->department_id == 7) {
                     $amount = FeeType::find(108)->amount;
                     $amount_hif = FeeType::find(108)->hif;
                     $fee_type_id = 108;
@@ -482,6 +492,10 @@ class PatientController extends Controller
             $status = 'Normal';
         } else {
             $status = $request->status;
+        }
+
+        if ($status === 'Return' && ! auth()->user()->can('return invoices')) {
+            abort(403, 'You are not authorized to create return invoices.');
         }
 
         $add_to_cart = PatientTestCart::create([

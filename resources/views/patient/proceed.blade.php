@@ -31,8 +31,8 @@
                         {{-- {!! DNS2D::getBarcodeSVG($patient_id, 'QRCODE',3,3) !!}--}}
                     </div>
                 </div>
-                <h1 class="text-center text-2xl font-bold">District Headquarters Hospital </h1>
-                <h2 class="text-1xl text-center font-bold">Jehlum Valley, Hattian, Azad Jammu & Kashmir</h2>
+                <h1 class="text-center text-2xl font-bold">{{ config('app.name') }}</h1>
+                <h2 class="text-1xl text-center font-bold">Muzaffarabad, Azad Jammu & Kashmir</h2>
                 <h2 class="text-1xl text-center font-extrabold mb-2">Serving the Humanity</h2>
                 <table class="table-auto w-full">
                     <tr class="border-none">
@@ -183,14 +183,14 @@
                                             @endforeach
                                         </select>
 
-                                        @role('Administrator|Super-Admin')
+                                        @if(auth()->user()->can('return invoices'))
                                         <select name="status" required id="status" width="50%"
                                             class="select2 w-1/2 px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500">
                                             <option value="">Select status of invoice</option>
                                             <option value="Normal" selected>Normal</option>
                                             <option value="Return">Return</option>
                                         </select>
-                                        @endrole
+                                        @endif
 
                                         <input type="hidden" value="{{ $patient->id }}" name="patient_id">
                                     </td>

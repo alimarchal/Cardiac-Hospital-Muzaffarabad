@@ -62,7 +62,8 @@
                                     <option value="">Select a role</option>
                                     @foreach ($roles as $id => $name)
                                         <option value="{{ $id }}" {{ old('role', $userRoleId) == $id ? 'selected' : '' }}>
-                                            {{ $name }}</option>
+                                            {{ $name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -70,7 +71,8 @@
 
                         <div class="mt-6 border-t pt-6">
                             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
-                                {{ __('Change Password (leave blank to keep current)') }}</h3>
+                                {{ __('Change Password (leave blank to keep current)') }}
+                            </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <x-label for="password" value="{{ __('New Password') }}" />
@@ -88,18 +90,24 @@
 
                         <div class="mt-6 border-t pt-6">
                             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
-                                {{ __('Direct Permissions') }}</h3>
+                                {{ __('Direct Permissions') }}
+                            </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
                                 Select permissions to assign directly to this user. These are in addition to permissions
                                 inherited from roles.
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                @php
+                                    $selectedPermissions = collect(old('permissions', $userPermissions ?? []))
+                                        ->map(fn($permissionId) => (int) $permissionId)
+                                        ->all();
+                                @endphp
                                 @foreach ($permissions as $permission)
                                     <label class="flex items-center">
                                         <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
                                             class="rounded border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
-                                            {{ in_array($permission->id, old('permissions', $userPermissions)) ? 'checked' : '' }}>
+                                            {{ in_array($permission->id, $selectedPermissions, true) ? 'checked' : '' }}>
                                         <span
                                             class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission->name }}</span>
                                     </label>
