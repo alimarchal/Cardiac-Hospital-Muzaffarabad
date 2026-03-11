@@ -103,10 +103,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('reports/ssp/claims', [\App\Http\Controllers\ReportsController::class, 'sspClaims'])->name('reports.ssp.claims')->middleware('permission:view ssp reports');
     });
 
-    // Process and Restore Invoice Routes
-    Route::middleware('permission:return invoices')->group(function () {
-        Route::get('/process', [\App\Http\Controllers\ProcessInvoicesController::class, 'process'])->name('invoices.process');
-        Route::get('/restore', [\App\Http\Controllers\ProcessInvoicesController::class, 'restore'])->name('invoices.restore');
-    });
-
 });

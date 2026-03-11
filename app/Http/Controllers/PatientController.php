@@ -494,7 +494,7 @@ class PatientController extends Controller
             $status = $request->status;
         }
 
-        if ($status === 'Return' && ! auth()->user()->can('return invoices')) {
+        if ($status === 'Return' && ! auth()->user()->getAllPermissions()->contains('name', 'return invoices')) {
             abort(403, 'You are not authorized to create return invoices.');
         }
 

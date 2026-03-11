@@ -124,7 +124,7 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|exists:roles,id,guard_name,'.self::ROLE_GUARD,
             'department_id' => 'nullable|exists:departments,id',
-            'status' => 'required|in:Active,Inactive',
+            'status' => 'required|boolean',
             'permissions' => 'nullable|array',
             'permissions.*' => 'exists:permissions,id,guard_name,'.self::ROLE_GUARD,
         ]);
@@ -133,7 +133,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'department_id' => $request->department_id,
-            'status' => $request->status,
+            'status' => $request->boolean('status'),
         ]);
 
         if ($request->filled('password')) {

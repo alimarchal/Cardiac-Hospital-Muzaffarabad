@@ -36,10 +36,13 @@
 
                             <div>
                                 <x-label for="status" value="{{ __('Status') }}" />
+                                @php
+                                    $selectedStatus = (string) old('status', (int) $user->status);
+                                @endphp
                                 <select name="status" id="status"
                                     class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="Active" {{ old('status', $user->status) === 'Active' ? 'selected' : '' }}>Active</option>
-                                    <option value="Inactive" {{ old('status', $user->status) === 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="1" {{ $selectedStatus === '1' ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ $selectedStatus === '0' ? 'selected' : '' }}>Inactive</option>
                                 </select>
                             </div>
 

@@ -7,8 +7,8 @@
             @can('create users')
                 <a href="{{ route('users.create') }}"
                     class="float-right ml-2 inline-flex items-center px-4 py-2 bg-red-800 border border-transparent
-                            rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900
-                            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900
+                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                     Create User
                 </a>
             @endcan
@@ -51,7 +51,8 @@
                             <option value="">All Roles</option>
                             @foreach ($roles as $role)
                                 <option value="{{ $role }}" {{ request('filter.role') === $role ? 'selected' : '' }}>
-                                    {{ $role }}</option>
+                                    {{ $role }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -61,9 +62,9 @@
                         <select name="filter[status]" id="status"
                             class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:border-blue-500">
                             <option value="">All Status</option>
-                            <option value="Active" {{ request('filter.status') === 'Active' ? 'selected' : '' }}>Active
+                            <option value="1" {{ request('filter.status') === '1' ? 'selected' : '' }}>Active
                             </option>
-                            <option value="Inactive" {{ request('filter.status') === 'Inactive' ? 'selected' : '' }}>
+                            <option value="0" {{ request('filter.status') === '0' ? 'selected' : '' }}>
                                 Inactive</option>
                         </select>
                     </div>
@@ -75,7 +76,8 @@
                             <option value="">All Departments</option>
                             @foreach ($departments as $id => $name)
                                 <option value="{{ $id }}" {{ request('filter.department_id') == $id ? 'selected' : '' }}>
-                                    {{ $name }}</option>
+                                    {{ $name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -148,8 +150,8 @@
                                     </td>
                                     <td class="border px-2 py-2 border-black font-medium">
                                         <span
-                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $user->status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                            {{ $user->status }}
+                                            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $user->status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                            {{ $user->status ? 'Active' : 'Inactive' }}
                                         </span>
                                     </td>
                                     <td class="border px-2 py-2 border-black font-medium text-black dark:text-white">
