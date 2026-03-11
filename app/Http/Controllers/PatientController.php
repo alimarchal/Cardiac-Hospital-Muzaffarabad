@@ -521,7 +521,10 @@ class PatientController extends Controller
     public function proceed_to_invoice(\Illuminate\Http\Request $request, Patient $patient)
     {
         // Validate that the user has agreed to the terms.
-        $request->validate(['terms' => 'required']);
+        $request->validate([
+            'terms' => 'required',
+            'admission_no' => 'nullable|required_if:admission_form_return,1|integer|exists:admissions,id',
+        ]);
 
         // Fetch the patient's test cart items.
         $patientTestCartItems = PatientTestCart::where('patient_id', $patient->id)->get();
@@ -673,14 +676,16 @@ class PatientController extends Controller
             }
 
             if ($request->has('admission_form_return') && $request->admission_form_return == 1) {
-                $invoice = Invoice::find($request->admission_no);
+                $admission = Admission::query()
+                    ->where('id', $request->admission_no)
+                    ->where('patient_id', $patientId)
+                    ->first();
 
-                if (! empty($invoice)) {
-                    $admission = Admission::find($invoice->id);
+                if (! empty($admission)) {
                     $admission->status = 'Yes';
                     $admission->save();
                 } else {
-                    return throw new \ErrorException('Error found');
+                    throw new \ErrorException('Admission record not found for this patient.');
                 }
             }
 
