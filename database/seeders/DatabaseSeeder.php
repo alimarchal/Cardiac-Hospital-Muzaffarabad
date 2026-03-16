@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DepartmentSeeder::class,
             FeeSeeder::class,
+            EmergencyFeeTypeSeeder::class,
             DiseaseSeeder::class,
             LocationSeeder::class,
             AdmissionWardSeeder::class,
