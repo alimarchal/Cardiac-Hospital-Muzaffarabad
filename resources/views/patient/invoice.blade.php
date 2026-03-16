@@ -308,10 +308,8 @@
 
 
                             <tr class="border-black">
-                                <td class="border-black border text-center">MOIC Signature</td>
-                                <td class="border-black border text-center" colspan="3">
-                                    <br>
-                                    <br>
+                                <td class="border-black border text-left px-2 py-2" colspan="4">
+                                    <div style="padding-top: 20px;">MOIC: ________________</div>
                                 </td>
                             </tr>
 
